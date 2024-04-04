@@ -193,7 +193,6 @@ nav{
         width: calc(25% - 15px);
     }
     .big-box .second:nth-child(9){
-        margin-left: 20px;
         width: calc(25% - 15px);
     }
     .big-box .second:nth-child(8){
@@ -241,12 +240,13 @@ nav{
         margin-top: 20px;
         margin-left: 0; 
     }
+    .big-box .second:nth-child(9){
+        width: 100%;
+    }
     .big-box .second:nth-child(4){
         width: 100%;
     }
-    .big-box .second:nth-child(10){
-        width: 100%;
-    }
+    
     #icon{
         width: 40px;
     }
