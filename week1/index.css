@@ -97,12 +97,7 @@ nav{
     justify-content: center;
     margin: 0 auto; 
 }
-.box{
-    width: 100%;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;  
-}
+
 .sbox{
     width: 100%;
     flex-wrap: wrap;
@@ -155,11 +150,11 @@ nav{
     padding: 10px;
 }
 
-.big-box .second:nth-child(1) {
+.big-box .second:nth-child(9) {
     width:calc((100% / 3) - 20px);
     margin-left: 0;
 }
-.big-box .second:nth-child(6) {
+.big-box .second:nth-child(4) {
     width:calc((100% / 3) - 20px);
     margin-left: 0;
 }
@@ -187,11 +182,6 @@ nav{
         margin-right: 0; 
         margin-top: 20px;
       }
-    .box{
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-    }
     #icon{
         width: 30px;
     }
@@ -199,21 +189,21 @@ nav{
         width: calc(25% - 15px);
         
     }
-    .big-box .second:nth-child(1){
+    .big-box .second:nth-child(4){
         width: calc(25% - 15px);
     }
-    .big-box .second:nth-child(6){
+    .big-box .second:nth-child(9){
         margin-left: 20px;
         width: calc(25% - 15px);
     }
-    .big-box .second:nth-child(5){
+    .big-box .second:nth-child(8){
         margin-left: 0;
     }
-    .big-box .second:nth-child(9){
+    .big-box .second:nth-child(12){
         margin-left: 0;
         width: calc(50% - 10px);
     }
-    .big-box .second:nth-child(10){
+    .big-box .second:nth-child(13){
         width: calc(50% - 10px);
     }
 }
@@ -251,10 +241,10 @@ nav{
         margin-top: 20px;
         margin-left: 0; 
     }
-    .big-box .second:nth-child(1){
+    .big-box .second:nth-child(4){
         width: 100%;
     }
-    .big-box .second:nth-child(6){
+    .big-box .second:nth-child(10){
         width: 100%;
     }
     #icon{
