@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Task</title>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    
+</head>
+<body>
+    <nav>
+        <div class="title">My Website</div>
+        <div class="menu">
+            <div class="option">Item1</div>
+            <div class="option">Item2</div>
+            <div class="option">Item3</div>
+            <div class="option" style="margin-right: 0;">Item4</div>
+            <div class="burger-menu" onclick="toggleMenu()">
+                <img src="burger.png" />
+            </div>
+        </div>
+        <div id="popupMenu" class="popup-menu">
+            <div class="close-icon" onclick="closeMenu()">X</div>
+            <div class="list">Item1</div>
+            <div class="list">Item2</div>
+            <div class="list">Item3</div>
+            <div class="list">Item4</div>
+        </div>
+    </nav>
+    
+
+    <div class="welcome">Welcome to MyHome</div>
+    
+    <div class="big-box">
+        <div class="sbox">
+            <div class="top" style="margin-left: 0;">
+                <img src="cat.jpg" >
+                <div class="text">Promotion 1</div>
+            </div>
+            <div class="top">
+                <img src="cat.jpg">
+                <div class="text">Promotion 2</div>
+            </div>
+            <div class="top" >
+                <img src="cat.jpg">
+                <div class="text">Promotion 3</div>
+            </div>
+        </div>
+    </div>
+    <div class="big-box">
+        <div class="box">
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 1</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 2</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 3</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 4</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 5</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 6</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 7</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 8</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 9</div>
+            </div>
+            <div class="second" >
+                <img src="cat.jpg">
+                <img src="w.png" id="icon">
+                <div class="text2">Title 10</div>
+            </div>  
+        </div>
+    </div>
+    <script>
+        function toggleMenu() {
+            let popupMenu = document.getElementById("popupMenu");
+            popupMenu.classList.toggle("active");
+        }
+
+        function closeMenu() {
+            let popupMenu = document.getElementById("popupMenu");
+            popupMenu.classList.remove("active");
+        }
+    </script>
+</body>
+</html>

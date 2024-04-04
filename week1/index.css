@@ -1,0 +1,266 @@
+* {
+    box-sizing: border-box;
+  }
+body{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    display: flex;
+    max-height: 48px;
+}
+.title{
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+.menu{
+    width: 50%;
+    justify-content:flex-end;
+    display: flex;
+    margin: 10px;
+}
+.option{
+    flex: none;
+    width: 80px;
+    margin-right: 10px;
+    font-size: 20px;
+    text-align: center;
+
+}
+.burger-menu{
+    display: none;
+    cursor: pointer;
+}
+.burger-menu img{
+    text-align: center;
+    margin: 4px 10px 0 10px;
+}
+
+.popup-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
+    width: 50%; 
+    height: 100vh; 
+    border: 1px solid #ccc;
+    z-index: 1000; 
+}
+
+.popup-menu.active {
+    display: block;
+}
+
+.close-icon {
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    cursor: pointer;
+    font-size: 30px; 
+    color: #666666; 
+    font-weight: bold;
+    margin: 0;
+}
+.list{
+    text-align: center;
+    margin: 30px;
+    font-size: 24px;
+}
+
+.welcome{
+    background-color: lightblue;
+    height: 250px;
+    display: flex;
+    justify-content: center;    
+    align-content: center;      
+    flex-wrap: wrap;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+#icon{
+    position: absolute;
+    top: 0; 
+    right: 0; 
+    width: 20px; 
+    height: auto; 
+    opacity: 0.7;
+}
+
+.big-box{
+    width: 1200px; 
+    display: flex;  
+    justify-content: center;
+    margin: 0 auto; 
+}
+.box{
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;  
+}
+.sbox{
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;  
+}
+.top{
+    flex: none;
+    width: calc((100% / 3) - 20px);
+    display: flex;
+    background-color: lemonchiffon;
+    margin-left: 20px;
+}
+.big-box .top:first-child {
+    margin-left: 0;
+}
+.text{
+    flex: auto;
+    padding: 12px;
+}
+.top img{
+    object-fit: cover;
+    width: 80px;
+    height: 50px;
+}
+.second{
+    width: calc((100% - (100% / 3) ) / 4 - 20px);
+    display: flex;
+    background-color: lemonchiffon;
+    margin-left: 20px;
+    margin-top: 20px;
+    position:relative;
+
+}
+.second img{
+    width:100%; 
+    height:200px; 
+    position:relative;
+    object-fit: cover;
+}
+
+.text2{
+    flex: none;
+    width: 100%;
+    text-align: center;
+    background-color: aliceblue;
+    position: absolute;
+    bottom: 0%;
+    opacity: 0.5;
+    padding: 10px;
+}
+
+.big-box .second:nth-child(1) {
+    width:calc((100% / 3) - 20px);
+    margin-left: 0;
+}
+.big-box .second:nth-child(6) {
+    width:calc((100% / 3) - 20px);
+    margin-left: 0;
+}
+
+
+@media (min-width: 601px) and (max-width: 1200px) {
+    
+    .big-box {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+    .sbox{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .top {
+        width: calc(50% - 10px); 
+        
+      }
+    .top:nth-child(3) { 
+        width: 100%; 
+        margin-left: 0; 
+        margin-right: 0; 
+        margin-top: 20px;
+      }
+    .box{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #icon{
+        width: 30px;
+    }
+    .second{
+        width: calc(25% - 15px);
+        
+    }
+    .big-box .second:nth-child(1){
+        width: calc(25% - 15px);
+    }
+    .big-box .second:nth-child(6){
+        margin-left: 20px;
+        width: calc(25% - 15px);
+    }
+    .big-box .second:nth-child(5){
+        margin-left: 0;
+    }
+    .big-box .second:nth-child(9){
+        margin-left: 0;
+        width: calc(50% - 10px);
+    }
+    .big-box .second:nth-child(10){
+        width: calc(50% - 10px);
+    }
+}
+@media (min-width: 360px) and (max-width: 600px){
+    .option{
+        display: none;
+    }
+    .burger-menu{
+        display: block;
+        justify-content:flex-end;
+    }
+    
+    .big-box {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+    .sbox{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .top {
+        width: 100%;
+        margin-top: 20px;
+        margin-left: 0; 
+    }
+    .box{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .second{
+        width: 100%;
+        margin-top: 20px;
+        margin-left: 0; 
+    }
+    .big-box .second:nth-child(1){
+        width: 100%;
+    }
+    .big-box .second:nth-child(6){
+        width: 100%;
+    }
+    #icon{
+        width: 40px;
+    }
+    
+
+}
+
