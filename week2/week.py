@@ -1,18 +1,18 @@
 print("=== Task 1 ===")
 def find_and_print(messages, current_station):
-    if current_station=="Qizhang":
-        print("Leslie")
-        return
-    greenLine=["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjing Nanjing", "Zhongshan", "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building", "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang","Xiaobitan", "Xindian City Hall", "Xindian"]
+    greenLine=["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjing Nanjing", "Zhongshan", "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building", "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xiaobitan", "Xindian City Hall", "Xindian"]
     minNear=float("inf")
     currentStationIndex=greenLine.index(current_station)
     for key,value in messages.items():
         for greenIndex,station in enumerate(greenLine):
-            if station=="Xiaobitan":
-                greenIndex-=2
             if station in value:
-                if abs(greenIndex-currentStationIndex)<minNear:
-                    minNear=abs(greenIndex-currentStationIndex)
+                distance=abs(greenIndex-currentStationIndex)
+                if current_station == "Xindian City Hall" and station == "Xindian":
+                    minNear = distance
+                    friend = key
+                    break
+                elif distance < minNear:
+                    minNear = distance
                     friend=key
     print(friend)
 messages={
@@ -27,6 +27,7 @@ find_and_print(messages, "Songshan") # print Copper
 find_and_print(messages, "Qizhang") # print Leslie 
 find_and_print(messages, "Ximen") # print Bob 
 find_and_print(messages, "Xindian City Hall") # print Vivian
+find_and_print(messages, "Dapinglin") # print Mary
 
 print("=== Task 2 ===")
 JohnSchedule = [0] * 24
