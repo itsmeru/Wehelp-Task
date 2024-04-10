@@ -27,7 +27,6 @@ find_and_print(messages, "Songshan") # print Copper
 find_and_print(messages, "Qizhang") # print Leslie 
 find_and_print(messages, "Ximen") # print Bob 
 find_and_print(messages, "Xindian City Hall") # print Vivian
-find_and_print(messages, "Dapinglin") # print Mary
 
 print("=== Task 2 ===")
 JohnSchedule = [0] * 24
