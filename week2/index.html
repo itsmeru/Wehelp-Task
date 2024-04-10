@@ -9,12 +9,8 @@
     <script>
         console.log("=== Task 1 ===");
         function findAndPrint(messages, currentStation) {
-            if (currentStation === "Qizhang") {
-                console.log("Leslie");
-                return;
-            }
             let minNear = Number.POSITIVE_INFINITY;
-            let stations = ["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjing Nanjing", "Zhongshan", "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building", "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"];
+            let stations = ["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjing Nanjing", "Zhongshan", "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building", "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xiaobitan","Xindian City Hall", "Xindian"];
             let currentStationIndex = stations.indexOf(currentStation);
             let friend = "";
             for (let [key, value] of Object.entries(messages)) {
@@ -22,6 +18,7 @@
                     let station = stations[i];
                     if (value.includes(station)) {
                         let stationIndex = i;
+                        if(station==="Xiaobitan"){stationIndex-=2}
                         if (Math.abs(stationIndex - currentStationIndex) < minNear) {
                             minNear = Math.abs(stationIndex - currentStationIndex);
                             friend = key;

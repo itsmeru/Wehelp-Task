@@ -3,11 +3,13 @@ def find_and_print(messages, current_station):
     if current_station=="Qizhang":
         print("Leslie")
         return
-    greenLine=["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjing Nanjing", "Zhongshan", "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building", "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"]
+    greenLine=["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjing Nanjing", "Zhongshan", "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building", "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang","Xiaobitan", "Xindian City Hall", "Xindian"]
     minNear=float("inf")
     currentStationIndex=greenLine.index(current_station)
     for key,value in messages.items():
         for greenIndex,station in enumerate(greenLine):
+            if station=="Xiaobitan":
+                greenIndex-=2
             if station in value:
                 if abs(greenIndex-currentStationIndex)<minNear:
                     minNear=abs(greenIndex-currentStationIndex)
