@@ -1,112 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>First Task</title>
-    <link rel="stylesheet" type="text/css" href="index.css"/>
-    
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
     <nav>
-        <div class="title">My Website</div>
-        <div class="menu">
-            <div class="option">Item1</div>
-            <div class="option">Item2</div>
-            <div class="option">Item3</div>
-            <div class="option" style="margin-right: 0;">Item4</div>
-            <div class="burger-menu" onclick="toggleMenu()">
-                <img src="burger.png" />
-            </div>
+      <div class="title">My Website</div>
+      <div class="menu">
+        <div class="option">Item1</div>
+        <div class="option">Item2</div>
+        <div class="option">Item3</div>
+        <div class="option" style="margin-right: 0">Item4</div>
+        <div class="burger-menu" onclick="toggleMenu()">
+          <img src="burger.png" />
         </div>
-        <div id="popupMenu" class="popup-menu">
-            <div class="close-icon" onclick="closeMenu()">X</div>
-            <div class="list">Item1</div>
-            <div class="list">Item2</div>
-            <div class="list">Item3</div>
-            <div class="list">Item4</div>
-        </div>
+      </div>
+      <div id="popupMenu" class="popup-menu">
+        <div class="close-icon" onclick="closeMenu()">X</div>
+        <div class="list">Item1</div>
+        <div class="list">Item2</div>
+        <div class="list">Item3</div>
+        <div class="list">Item4</div>
+      </div>
     </nav>
-    
 
     <div class="welcome">Welcome to MyHome</div>
-    
-    <div class="big-box">
-        <div class="sbox">
-            <div class="top" style="margin-left: 0;">
-                <img src="cat.jpg" >
-                <div class="text">Promotion 1</div>
-            </div>
-            <div class="top">
-                <img src="cat.jpg">
-                <div class="text">Promotion 2</div>
-            </div>
-            <div class="top" >
-                <img src="cat.jpg">
-                <div class="text">Promotion 3</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 1</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 2</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 3</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 4</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 5</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 6</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 7</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 8</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 9</div>
-            </div>
-            <div class="second" >
-                <img src="cat.jpg">
-                <img src="w.png" id="icon">
-                <div class="text2">Title 10</div>
-            </div>  
-        </div>
-    </div>
-    <script>
-        function toggleMenu() {
-            let popupMenu = document.getElementById("popupMenu");
-            popupMenu.classList.toggle("active");
-        }
 
-        function closeMenu() {
-            let popupMenu = document.getElementById("popupMenu");
-            popupMenu.classList.remove("active");
+    <div class="big-box">
+      <div class="sbox">
+        <div class="top" style="margin-left: 0"></div>
+        <div class="top"></div>
+        <div class="top"></div>
+
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+        <div class="second"></div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button id="loadMoreButton" class="button">Load More</button>
+    </div>
+    <script></script>
+    <script>
+      let url =
+        "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1";
+      function getData() {
+        return new Promise((resolve, reject) => {
+          let req = new XMLHttpRequest();
+          req.open("get", url);
+          req.onload = function () {
+            resolve(JSON.parse(req.responseText));
+          };
+          req.onerror = function () {
+            reject("error");
+          };
+          req.send();
+        });
+      }
+      function getUrl(pic_url) {
+        let url = pic_url.toLowerCase();
+        let startIndex = url.indexOf("https://");
+        let endIndex = url.indexOf(".jpg", startIndex);
+        if (endIndex === -1) {
+          return url.substring(startIndex);
         }
+        return url.substring(startIndex, endIndex + 4);
+      }
+
+      function showRender(titles, imgUrls) {
+        let topFilled = false;
+        let secondFilled = false;
+
+        for (let i = 0; i < titles.length; i++) {
+          let title = titles[i];
+          let imgUrl = imgUrls[i];
+
+          if (!topFilled) {
+            let topElements = document.querySelectorAll(".top:not(:has(*))");
+            let topElement = topElements[0];
+
+            let imgElement = document.createElement("img");
+            imgElement.setAttribute("src", imgUrl);
+
+            let titleElement = document.createElement("div");
+            titleElement.textContent = title;
+            titleElement.classList.add("text");
+
+            topElement.appendChild(imgElement);
+            topElement.appendChild(titleElement);
+
+            if (topElements.length === 1) {
+              topFilled = true;
+            }
+          } else if (!secondFilled) {
+            let secondElements = document.querySelectorAll(
+              ".second:not(:has(*))"
+            );
+            let secondElement = secondElements[0];
+
+            let imgElement = document.createElement("img");
+            imgElement.setAttribute("src", imgUrl);
+
+            let titleElement = document.createElement("div");
+            titleElement.textContent = title;
+            titleElement.classList.add("text2");
+
+            let iconElement = document.createElement("img");
+            iconElement.setAttribute("src", "w.png");
+            iconElement.setAttribute("id", "icon");
+
+            secondElement.appendChild(imgElement);
+            secondElement.appendChild(titleElement);
+            secondElement.appendChild(iconElement);
+
+            if (secondElements.length === 1) {
+              secondFilled = true;
+            }
+          } else {
+            break;
+          }
+        }
+      }
+
+      let title = [];
+      let pic = [];
+      let promise = getData();
+      promise
+        .then((result) => {
+          let spot = result.data.results;
+          for (let i = 0; i < Object.keys(spot).length; i++) {
+            title.push(spot[i].stitle);
+            pic.push(getUrl(spot[i].filelist));
+          }
+          showRender(title, pic);
+        })
+        .catch((err) => console.log(err));
     </script>
-</body>
+    <script>
+      document
+        .getElementById("loadMoreButton")
+        .addEventListener("click", function () {
+          // 在按下按鈕時執行載入更多內容的函數
+          loadMoreImages();
+        });
+    </script>
+  </body>
 </html>
