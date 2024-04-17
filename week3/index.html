@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First Task</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+  </head>
+  <body>
+    <script src="./burger.js"></script>
+    <nav>
+      <div class="title">My Website</div>
+      <div class="menu">
+        <div class="option">Item1</div>
+        <div class="option">Item2</div>
+        <div class="option">Item3</div>
+        <div class="option" style="margin-right: 0">Item4</div>
+        <div class="burger-menu" onclick="toggleMenu()">
+          <img src="burger.png" />
+        </div>
+      </div>
+      <div id="popupMenu" class="popup-menu">
+        <div class="close-icon" onclick="closeMenu()">X</div>
+        <div class="list">Item1</div>
+        <div class="list">Item2</div>
+        <div class="list">Item3</div>
+        <div class="list">Item4</div>
+      </div>
+    </nav>
+
+    <div class="welcome">Welcome to MyHome</div>
+
+    <div class="big-box"></div>
+    <div class="button-container">
+      <button class="button" onclick="load_fun()">Load More</button>
+    </div>
+    <script>
+      let url =
+        "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1";
+      function getData() {
+        return new Promise((resolve, reject) => {
+          let req = new XMLHttpRequest();
+          req.open("get", url);
+          req.onload = function () {
+            resolve(JSON.parse(req.responseText));
+          };
+          req.onerror = function () {
+            reject("error");
+          };
+          req.send();
+        });
+      }
+      function getUrl(picUrl) {
+        let url = picUrl.toLowerCase();
+        let startIndex = url.indexOf("https://");
+        let endIndex = url.indexOf(".jpg", startIndex);
+        if (endIndex === -1) {
+          return picUrl.substring(startIndex);
+        }
+        return picUrl.substring(startIndex, endIndex + 4);
+      }
+
+      function renderSecond(imgUrl, title, index) {
+        let topElements = document.createElement("div");
+        topElements.classList.add("box");
+        let imgElement = document.createElement("img");
+        imgElement.setAttribute("src", imgUrl);
+        imgElement.classList.add("down_img");
+
+        let titleElement = document.createElement("div");
+        titleElement.textContent = title;
+        titleElement.classList.add("text");
+
+        let iconElement = document.createElement("img");
+        iconElement.setAttribute("src", "w.png");
+        iconElement.setAttribute("id", "icon");
+
+        topElements.appendChild(imgElement);
+        topElements.appendChild(titleElement);
+        topElements.appendChild(iconElement);
+
+        container.appendChild(topElements);
+      }
+      let load_more_index = 0;
+      let container = document.querySelector(".big-box");
+      function showRender(titles, imgUrls) {
+        for (let i = 0; i < titles.length; i++) {
+          let title = titles[i];
+          let imgUrl = imgUrls[i];
+
+          if (i < 3) {
+            let topElements = document.createElement("div");
+            topElements.classList.add("box");
+            let imgElement = document.createElement("img");
+            imgElement.setAttribute("src", imgUrl);
+            imgElement.classList.add("top_img");
+
+            let titleElement = document.createElement("div");
+            titleElement.textContent = title;
+            titleElement.classList.add("top_text");
+
+            topElements.appendChild(imgElement);
+            topElements.appendChild(titleElement);
+            container.appendChild(topElements);
+          } else if (i < 13) {
+            renderSecond(imgUrl, title, i + 1);
+          } else {
+            load_more_index = i;
+            break;
+          }
+        }
+      }
+
+      let title = [];
+      let pic = [];
+      function loadMore(titles, imgUrls) {
+        let load_count = 0;
+        for (let i = load_more_index; i < titles.length; i++) {
+          if (load_count < 10) {
+            let title = titles[i];
+            let imgUrl = imgUrls[i];
+            renderSecond(imgUrl, title, i + 1);
+            load_count += 1;
+            load_more_index = i + 1;
+          } else {
+            break;
+          }
+          if (load_more_index >= titles.length) {
+            document.querySelector(".button-container").style.display = "none";
+          }
+        }
+      }
+      function load_fun() {
+        loadMore(title, pic);
+      }
+
+      let promise = getData();
+      promise
+        .then((result) => {
+          let spot = result.data.results;
+          for (let i = 0; i < Object.keys(spot).length; i++) {
+            title.push(spot[i].stitle);
+            pic.push(getUrl(spot[i].filelist));
+          }
+          showRender(title, pic);
+        })
+        .catch((err) => console.log(err));
+    </script>
+  </body>
+</html>
