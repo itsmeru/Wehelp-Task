@@ -18,10 +18,11 @@ spot_list=file["data"]["results"]
 mrt_dic={}
 with open ("./week3/spot.csv","w",encoding="utf-8") as spot_file:
     for data in spot_list:
+        img_src=data["filelist"].lower()
         distinct_place=None
-        start_index = data["filelist"].find("https:")
-        end_index = data["filelist"].find(".jpg") + 4
-        first_url = data["filelist"][start_index:end_index]
+        start_index = img_src.find("https:")
+        end_index = img_src.find(".jpg") + 4
+        first_url = img_src[start_index:end_index]
 
         for item in mrt_list:
             if item["SERIAL_NO"] == data["SERIAL_NO"]:
