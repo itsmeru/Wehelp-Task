@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verification system</title>
+    <style>
+      body {
+        margin: 0;
+        border: 0;
+        height: 100vh;
+      }
+      .title {
+        width: 100%;
+        height: 100px;
+        background-color: darkcyan;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        font-size: 20px;
+      }
+      .btn {
+        padding: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .account{
+        padding: 10px;
+      }
+      .account input{
+        margin-left: 10px;
+        height: 20px;
+
+      }
+      hr {
+        background-color: gray;
+      }
+      p{
+        margin-bottom: 0;
+      }
+      .secBox{
+        font-size: 20px;
+        text-align: center;
+        padding: 15px;
+      }
+      .secTitle{
+        margin-top: 10px;
+      }
+      .secTitle input{
+        margin-left: 10px;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">歡迎光臨，請輸入帳號密碼</div>
+    <div class="content">
+      <p>登入系統</p>
+      <form action="/signin" method="post" onsubmit="return signIn()">
+        <div class="account">帳號<input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your id"
+          />
+        </div>
+        <div class="account">密碼<input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <div>同意條款<input id="termsCheckbox" type="checkbox" /></div>
+        <button class="btn" type="submit">登入</button>
+      </form>
+    </div>
+    <hr />
+    <form action="/square" method="post" onsubmit="return checkNum()">
+      <div class="secBox">
+        <div >計算正整數的平方</div>
+        <div class="secTitle">正整數<input type="text" name="num" id="inputBox" placeholder="請輸入正整數"/></div>
+        <button class="btn" type="submit">計算</button>
+      </div>
+
+    </form>
+   
+    <script>
+      function signIn() {
+        if (!document.getElementById("termsCheckbox").checked) {
+          alert("Please check the checkbox first");
+          return false;
+        } else {
+          return true;
+        }
+      }
+      function checkNum(){
+        if(document.getElementById("inputBox").value<0){
+          alert("Please enter a positive number");
+          inputBox.value = "";
+          return false;
+        }else{
+          return true;
+        }
+      }
+    </script>
+  </body>
+</html>
