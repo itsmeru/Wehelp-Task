@@ -87,7 +87,7 @@
       </form>
     </div>
     <hr />
-    <form action="/calculate" method="post" onsubmit="return checkNum()">
+    <form onsubmit="return checkNum()">
       <div class="secBox">
         <div >計算正整數的平方</div>
         <div class="secTitle">正整數<input type="text" name="num" id="inputBox" placeholder="請輸入正整數"/></div>
@@ -111,7 +111,10 @@
           inputBox.value = "";
           return false;
         }else{
-          return true;
+          let numInput = document.getElementById('inputBox').value;
+          let url = '/square/' + numInput;
+          window.location.href = url;
+          return false; 
         }
       }
     </script>

@@ -43,15 +43,12 @@ async def signIn(request:Request,username:str=Form(None),password:str=Form(None)
     else:
         error_message="Username or password is not correct"
         return RedirectResponse(url=f"/error?message={error_message}", status_code=303)
-@app.route("/member",methods=["GET", "POST"])
+@app.get("/member")
 async def member(request: Request):
-    if request.method == "POST":
-        return templates.TemplateResponse("./static/member.html", {"request": request})
+    if "username" not in request.session:
+        return RedirectResponse(url="/")
     else:
-        if "username" not in request.session:
-            return RedirectResponse(url="/")
-        else:
-            return templates.TemplateResponse("./static/member.html", {"request": request})
+        return templates.TemplateResponse("./static/member.html", {"request": request})
 
 @app.get("/error")
 async def error(request: Request ,message: str):
@@ -63,14 +60,12 @@ async def singout(request: Request):
     return RedirectResponse(url="/")
 
 
-@app.post("/calculate")
-async def calculate(num:int=Form(None)):
-    return RedirectResponse(url=f"/square/{num}",status_code=303)
+
     
 
 @app.get("/square/{num}")
 async def square(request: Request,num:int):
     result = num ** 2
-    return templates.TemplateResponse("./static/square.html", {"request": request, "num": result})
+    return templates.TemplateResponse("./static/square.html", {"request": request, "result": result})
 
 
