@@ -34,7 +34,7 @@ cursor=con.cursor()
 # data=cursor.fetchall()
 # print(data)
 
-# cursor.execute("UPDATE member SET name='test2' WHERE name='test' ")
+# cursor.execute("UPDATE member SET username='test2' WHERE username='test' ")
 
 # cursor.execute("SELECT COUNT(*) FROM member")
 
@@ -64,14 +64,15 @@ cursor=con.cursor()
 #                JOIN member 
 #                ON member.id=message.member_id
 #               """)
-# cursor.execute("""
-#             SELECT * FROM (
-#                 SELECT message.*,member.name AS sender_names 
-#                 FROM message 
-#                 JOIN member 
-#                 ON member.id=message.member_id
-#                 ) AS sender_names WHERE sender_names='test'
-#             """)
+cursor.execute("""
+            SELECT * FROM (
+                SELECT message.*,member.name AS sender_names 
+                FROM message 
+                JOIN member 
+                ON member.id=message.member_id
+                WHERE member.username='test'
+                )AS subquery 
+            """)
 # cursor.execute("""
 #             SELECT AVG(like_count) FROM (
 #                 SELECT message.*,member.name AS sender_names 
@@ -80,14 +81,14 @@ cursor=con.cursor()
 #                 ON member.id=message.member_id
 #                 ) AS sender_names WHERE sender_names='test'
 #             """)
-cursor.execute("""
-            SELECT sender_names, AVG(like_count) FROM (
-                SELECT message.*,member.name AS sender_names 
-                FROM message 
-                JOIN member 
-                ON member.id=message.member_id
-                ) AS sender_names GROUP BY sender_names
-            """)
+# cursor.execute("""
+#             SELECT sender_names, AVG(like_count) FROM (
+#                 SELECT message.*,member.name AS sender_names 
+#                 FROM message 
+#                 JOIN member 
+#                 ON member.id=message.member_id
+#                 ) AS sender_names GROUP BY sender_names
+#             """)
                 
 # cursor.execute("INSERT INTO message(member_id, content, like_count) VALUES(5,'LIKE ME?',2)")
 # cursor.execute("SELECT * FROM message")

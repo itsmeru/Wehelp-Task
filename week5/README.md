@@ -49,12 +49,13 @@ of time. Note: it does not mean SELECT rows where id are 2, 3, or 4.
 cursor.execute("SELECT * FROM member ORDER BY time DESC LIMIT 1, 3")
 ```
 ![alt text](<截圖 2024-04-29 下午5.37.58.png>)
+
 ● SELECT rows where username equals to test.
 
 ```python
-cursor.execute("SELECT * FROM member WHERE name='test' ")
+cursor.execute("SELECT * FROM member WHERE username='test' ")
 ```
-![alt text](<截圖 2024-04-29 下午5.39.53.png>)
+![alt text](<截圖 2024-04-30 上午8.52.00.png>)
 
 ● SELECT rows where name includes the es keyword.
 
@@ -73,9 +74,9 @@ cursor.execute("SELECT * FROM member WHERE name='test' AND password='test' ")
 ● UPDATE data in name column to test2 where username equals to test.
 
 ```python
-cursor.execute("UPDATE member SET name='test2' WHERE name='test' ")
+cursor.execute("UPDATE member SET username='test2' WHERE username='test' ")
 ```
-![alt text](<截圖 2024-04-29 下午5.43.52.png>)
+![alt text](<截圖 2024-04-30 上午8.45.34.png>)
 
 ### Task 4
 
@@ -148,10 +149,11 @@ cursor.execute("""
                 FROM message 
                 JOIN member 
                 ON member.id=message.member_id
-                ) AS sender_names WHERE sender_names='test'
+                WHERE username='test'
+                ) AS subquery
             """)
 ```
-![alt text](<截圖 2024-04-29 下午6.07.03.png>)
+![alt text](<截圖 2024-04-30 上午8.50.16.png>)
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test.
 
@@ -162,10 +164,11 @@ cursor.execute("""
                 FROM message 
                 JOIN member 
                 ON member.id=message.member_id
-                ) AS sender_names WHERE sender_names='test'
+                WHERE username='test'
+                ) AS subquery;
             """)
 ```
-![alt text](<截圖 2024-04-29 下午6.08.06.png>)
+![alt text](<截圖 2024-04-30 上午8.40.28.png>)
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender username.
 
