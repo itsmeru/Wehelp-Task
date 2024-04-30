@@ -40,7 +40,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'test','test','test',7,'2024-04-29 08:56:54'),(2,'test7','test','test2',2,'2024-04-29 09:02:45'),(3,'test3','test3','test3',3,'2024-04-29 09:02:45'),(4,'test4','test4','test4',4,'2024-04-29 09:02:45'),(5,'test5','test5','test5',5,'2024-04-29 09:03:01');
+INSERT INTO `member` VALUES (1,'test2','test','test',7,'2024-04-29 08:56:54'),(2,'test2','test','test2',2,'2024-04-29 09:02:45'),(3,'test3','test3','test3',3,'2024-04-29 09:02:45'),(4,'test4','test4','test4',4,'2024-04-29 09:02:45'),(5,'test5','test5','test5',5,'2024-04-29 09:03:01');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,4 +83,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-30  8:55:38
+-- Dump completed on 2024-04-30 14:34:54

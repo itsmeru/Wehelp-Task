@@ -67,16 +67,16 @@ cursor.execute("SELECT * FROM member WHERE name LIKE '%es%' ")
 ● SELECT rows where both username and password equal to test.
 
 ```python
-cursor.execute("SELECT * FROM member WHERE name='test' AND password='test' ")
+cursor.execute("SELECT * FROM member WHERE username='test' AND password='test' ")
 ```
-![alt text](<截圖 2024-04-29 下午5.42.07.png>)
+![alt text](<截圖 2024-04-30 下午2.03.04.png>)
 
 ● UPDATE data in name column to test2 where username equals to test.
 
 ```python
-cursor.execute("UPDATE member SET username='test2' WHERE username='test' ")
+cursor.execute("UPDATE member SET name='test2' WHERE username='test' ")
 ```
-![alt text](<截圖 2024-04-30 上午8.45.34.png>)
+![alt text](<截圖 2024-04-30 下午2.01.06.png>)
 
 ### Task 4
 
@@ -174,12 +174,10 @@ cursor.execute("""
 
 ```python
 cursor.execute("""
-            SELECT sender_names, AVG(like_count) FROM (
-                SELECT message.*,member.name AS sender_names 
-                FROM message 
-                JOIN member 
-                ON member.id=message.member_id
-                ) AS sender_names GROUP BY sender_names
+            SELECT member.username AS sender_username, AVG(message.like_count) 
+            FROM message
+            JOIN member ON message.member_id = member.id
+            GROUP BY member.username;
             """)
 ```
-![alt text](<截圖 2024-04-29 下午6.09.32.png>)
+![alt text](<截圖 2024-04-30 下午2.24.57.png>)
