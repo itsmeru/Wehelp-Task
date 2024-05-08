@@ -12,7 +12,7 @@ from starlette.responses import JSONResponse
 def connect_mysql(db_name):
     con=mysql.connector.connect(
         user="root",
-        password="0000",
+        password="betty520",
         host="localhost",
         database=db_name
     )
@@ -37,20 +37,9 @@ app.add_middleware(
     SessionMiddleware,
     secret_key="some-random-string",
     max_age=None,
-    cookie_name="user_session",
+    cookie_name="session_data",
 )
-app.add_middleware(
-    SessionMiddleware,
-    secret_key="some-random-string",
-    max_age=None,
-    cookie_name="page_name",
-)
-app.add_middleware(
-    SessionMiddleware,
-    secret_key="some-random-string",
-    max_age=None,
-    cookie_name="user_id",
-)
+
 templates = Jinja2Templates(directory=".")
 app.mount("/static", StaticFiles(directory="static"))
 def verify(request: Request,username,password):
@@ -77,7 +66,7 @@ def verify(request: Request,username,password):
 async def index(request: Request):
     return templates.TemplateResponse("./static/mysql.html", {"request": request})
 
-@app.post("/register")
+@app.post("/signup")
 async def register(request:Request,name:str=Form(None),username:str=Form(None),password:str=Form(None)):
     con=connect_mysql("website")
     cursor=con.cursor()    
@@ -124,7 +113,6 @@ async def singout(request: Request):
 
 @app.post("/createMessage")
 async def createMessage(request:Request,content:str=Form(None)):
-    print(request.form())
     con=connect_mysql("website")
     cursor=con.cursor()
     user_id= request.session.get("user_id")
