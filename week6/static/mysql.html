@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MYSQL 練習</title>
+    <style>
+      body {
+        margin: 0;
+        border: 0;
+        height: 100vh;
+      }
+      .title {
+        width: 100%;
+        height: 100px;
+        background-color: darkcyan;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        font-size: 20px;
+      }
+      .btn {
+        padding: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .register{
+        padding: 10px;
+      }
+      .register input{
+        margin-left: 10px;
+        height: 20px;
+      }
+      p{
+        margin-bottom: 0;
+      }
+      .secBox{
+        font-size: 20px;
+        text-align: center;
+        padding: 15px;
+      }
+      .secTitle{
+        margin-top: 10px;
+      }
+      .secTitle input{
+        margin-left: 10px;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">歡迎光臨，請註冊登入系統</div>
+    <div class="content">
+      <p>註冊</p>
+      <form  action="/register" method="post" onsubmit="return accountCk()">
+        <div class="register">姓名<input
+          type="text"
+          id="names"
+          name="name"
+          placeholder="Enter your name"
+          ></div>
+        <div class="register">帳號<input
+          type="text"
+          id="usernames"
+          name="username"
+          placeholder="Enter your id"
+        />
+      </div>
+      <div class="register">密碼<input
+          type="password"
+          id="passwords"
+          name="password"
+          placeholder="Enter your password"
+        />
+      </div>
+      <button class="btn" type="submit">註冊</button>
+      <hr />
+
+      </form>
+
+      <p>登入系統</p>
+      <form action="/signin" method="post" onsubmit="return signIn()">
+        <div class="register">帳號<input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your id"
+          />
+        </div>
+        <div class="register">密碼<input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <div>同意條款<input id="termsCheckbox" type="checkbox" /></div>
+        <button class="btn" type="submit">登入</button>
+      </form>
+    </div>
+    
+   
+    <script>
+      function accountCk(){
+        let name=document.getElementById("names").value;
+        let username=document.getElementById("usernames").value;
+        let password=document.getElementById("passwords").value;
+        if(name=== "" || username=== "" || password=== ""){
+          alert("Can't be empty input");
+          return false;
+        }
+
+      }
+      function signIn() {
+        let username=document.getElementById("username").value;
+        let password=document.getElementById("password").value;
+        console.log(username,password);
+        if (!document.getElementById("termsCheckbox").checked) {
+          alert("Please check the checkbox first");
+          return false;
+        }
+        else if(username==="" || password===""){
+          alert("Please enter your id and password");
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+     
+    </script>
+  </body>
+</html>
