@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success SignIn Page</title>
+    <style>
+      body {
+        margin: 0;
+        border: 0;
+        height: 100vh;
+      }
+      .title {
+        width: 100%;
+        height: 100px;
+        background-color: darkcyan;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .text {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        padding: 10px;
+      }
+      .text_out {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+      }     
+      #messageForm {
+        text-align: center; 
+      }
+
+      #messageForm .text2 {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center; 
+      }
+
+      #messageForm .btn {
+          padding: 5px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          margin-left: 10px;
+      }
+      .register{
+        padding: 10px;
+      }
+      .register input{
+        margin-left: 10px;
+        height: 20px;
+      }
+      .board{
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">歡迎光臨，這是會員頁</div>
+    <div class="text" id="pagename">{{pageName}}，成功登入系統</div>
+    <div class="text_out"><a href="/singout">Log Out</a></div>
+    <hr>
+    <div class="text">查詢會員姓名</div>
+    <form id="messageForm" class="text2" onsubmit="return searchName()">
+      <div class="register"><input type="text" id="memberId" name="memberId"><button class="btn">查詢</button>
+      </div>
+    </form>
+    <div id="searchResult" class="text"></div>
+    <hr>
+    <div class="text">更新我的姓名</div>
+    <form id="messageForm" class="text2" onsubmit="return updateName()">
+      <div class="register"><input type="text" id="updatename" name="updatename"><button class="btn">更新</button>
+      </div>
+    </form>
+    <div id="updateResult" class="text"></div>
+    <hr>
+      <div class="text">快來留言吧</div>
+      <form id="messageForm" class="text2" action="/createMessage" method="post" onsubmit="return contentCk()">
+          <div class="register">留言<input type="text" id="content" name="content"></div>
+          <button class="btn" type="submit">送出</button>
+      </form>
+      <hr>
+      <div class="board" id="boardmessage">
+        {% for message in messages %}
+            <span>{{ message[2] }} : {{ message[3] }}</span>
+          {% if message[1] == memberId %}
+              <button onclick="deleteMessage('{{ message[0] }}')">X</button>
+          {% endif %}
+          <br>
+        {% endfor %}
+      </div>
+      <div class="board">
+        {% if current_page!=1 %}
+        <a href="/member?page={{ current_page - 1 }}">&lsaquo; 上一頁  </a>
+        {% endif %}
+        {% if current_page < total_pages %}
+        <a href="/member?page={{ current_page + 1 }}">下一頁 &rsaquo; </a>
+        {% endif %}
+    </div>
+   
+    <script>
+      function updateName() {
+        let name = document.getElementById("updatename").value;
+        let pagename = document.getElementById("pagename");
+        let boardmessage = document.getElementById("boardmessage");
+        let nameResult = document.getElementById("updateResult");
+        let elm = document.createElement("div");
+        fetch("/api/member", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "name": name })
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(result => {
+          if(result.ok){
+            nameResult.innerHTML="";
+            elm.textContent = "更新成功";
+            pagename.textContent = name+"，成功登入系統";
+            nameResult.appendChild(elm);
+          }
+          else{
+            nameResult.innerHTML = "";
+            let errorMsg = document.createElement("div");
+            errorMsg.textContent = "更新失败";
+            nameResult.appendChild(errorMsg);
+          }
+            
+        })
+        document.getElementById("updatename").value = "";
+        return false; 
+    }
+
+
+      function searchName(){
+        let username=document.getElementById("memberId").value;
+        let content=document.getElementById("searchResult");
+        let element = document.createElement("div");
+        fetch(`/api/member?username=${username}`).then(res=>res.json()).then(result=>{
+          content.innerHTML = "";
+
+          if(result.data !== "查無此人"){
+            let data=`${result.data.name} (${result.data.username})`;
+            element.textContent = data;
+          }
+          else{
+            element.textContent = result.data;
+          }
+          content.appendChild(element);
+          
+        })
+        document.getElementById("memberId").value = "";
+        return false
+      }
+       function contentCk(){
+        let msg = document.getElementById("content").value;
+        if(msg.trim()=== ""){
+          location.reload();
+          return false;
+        }else{
+          return true;
+        }
+       }
+       function deleteMessage(messageId) {
+        if (confirm("Are you sure you want to delete this message?")) {
+            fetch(`/deleteMessage/${messageId}`, {
+                method: "DELETE"
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); 
+                } else {
+                    alert("Failed to delete message.");
+                }
+            })
+            
+        }
+      }
+    </script>
+  </body>
+</html>
