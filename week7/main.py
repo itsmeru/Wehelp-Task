@@ -23,7 +23,7 @@ async def add_csrf_token_to_session(request: Request, call_next):
 def connect_mysql(db_name):
     con=mysql.connector.connect(
         user="root",
-        password="",
+        password="betty520",
         host="localhost",
         database=db_name
     )
@@ -144,11 +144,11 @@ async def memberApi(request:Request,username:str=None):
 
 @app.patch("/api/member")
 async def updateName(request:Request,name:updatename):
-    member_name = request.session.get("page_name")
+    member_id = request.session.get("user_id")
 
     con = connect_mysql("website")
     with con.cursor() as cursor:
-        cursor.execute("UPDATE member SET name=%s WHERE name=%s",(name.name,member_name))
+        cursor.execute("UPDATE member SET name=%s WHERE id=%s",(name.name,member_id))
         request.session["page_name"]=name.name
         con.commit()
         if cursor.rowcount>0:
